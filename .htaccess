@@ -1,0 +1,25 @@
+#Alternate default index pages
+DirectoryIndex index.php index.html index.htm index2.html
+# Disable Directory Browsing
+Options All -Indexes
+
+RewriteEngine on
+ RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://attendancesystem.infinityfree.me/$1 [R,L]
+
+<FilesMatch "\.(css|htm|html|js)$">
+	<IfModule mod_expires.c>
+		ExpiresActive Off
+	</IfModule>
+	<IfModule mod_headers.c>
+		FileETag None
+		Header unset ETag
+		Header unset Pragma
+		Header unset Cache-Control
+		Header unset Last-Modified
+		Header set Pragma "no-cache"
+		Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+		Header set Expires "Mon, 10 Apr 1972 00:00:00 GMT"
+	</IfModule>
+</FilesMatch>
+RewriteEngine on
